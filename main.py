@@ -304,7 +304,7 @@ while stillRunning:
             buffer = input("Enter the first name of the new student record you would like to create, or enter <back> to exit to main menu: ")
             if (buffer.lower() == 'back'):
                 goBack = True
-            elif (all(x.isalpha() or x.isspace() or x == '\'' or x == '-' for x in buffer)):
+            elif ((not buffer == '') and all(x.isalpha() or x.isspace() or x == '\'' or x == '-' for x in buffer)):
                 tempStudent.FirstName = buffer
                 while (gettingLastName):
                     gettingGPA = True
@@ -312,7 +312,7 @@ while stillRunning:
                     buffer = input("Enter the last name of the new student record you would like to create, or enter <back> to return to first name input: ")
                     if (buffer.lower() == 'back'):
                         gettingLastName = False
-                    elif (all(x.isalpha() or x.isspace() or x == '\'' or x == '-' for x in buffer)):
+                    elif ((not buffer == '') and all(x.isalpha() or x.isspace() or x == '\'' or x == '-' for x in buffer)):
                         tempStudent.LastName = buffer
                         while (gettingGPA):
                             gettingMajor = True
@@ -321,7 +321,7 @@ while stillRunning:
                                 "Enter the GPA of the new student record you would like to create, or enter <back> to return to last name input: ")
                             if (buffer.lower() == 'back'):
                                 gettingGPA = False
-                            elif (buffer.count('.') == 1 and all(x.isdigit() or x == '.' for x in buffer)):
+                            elif ((not buffer == '') and buffer.count('.') == 1 and all(x.isdigit() or x == '.' for x in buffer)):
                                 tempStudent.GPA = buffer
                                 while (gettingMajor):
                                     gettingFacultyAdvisor = True
@@ -329,7 +329,7 @@ while stillRunning:
                                     buffer = input("Enter the major of the new student record you would like to create, or enter <back> to return to GPA input: ")
                                     if (buffer.lower() == 'back'):
                                         gettingMajor = False
-                                    elif (all(x.isalpha() or x.isspace() for x in buffer)):
+                                    elif ((not buffer == '') and all(x.isalpha() or x.isspace() for x in buffer)):
                                         tempStudent.Major = buffer
                                         while (gettingFacultyAdvisor):
                                             gettingAddress = True
@@ -337,7 +337,7 @@ while stillRunning:
                                             buffer = input("Enter the faculty advisor of the new student record you would like to create, or enter <back> to return to major input: ")
                                             if (buffer.lower() == 'back'):
                                                 gettingFacultyAdvisor = False
-                                            elif (all(x.isalpha() or x.isspace() or x == '\'' or x == '-' for x in buffer)):
+                                            elif ((not buffer == '') and all(x.isalpha() or x.isspace() or x == '\'' or x == '-' for x in buffer)):
                                                 tempStudent.FacultyAdvisor = buffer
                                                 while (gettingAddress):
                                                     gettingCity = True
@@ -345,7 +345,7 @@ while stillRunning:
                                                     buffer = input("Enter the address of the new student record you would like to create, or enter <back> to return to faculty advisor input: ")
                                                     if (buffer.lower() == 'back'):
                                                         gettingAddress = False
-                                                    elif (all(x.isalpha() or x.isspace() or x.isdigit() or x == '\'' or x == '-' for x in buffer)):
+                                                    elif ((not buffer == '') and all(x.isalpha() or x.isspace() or x.isdigit() or x == '\'' or x == '-' for x in buffer)):
                                                         tempStudent.Address = buffer
                                                         while (gettingCity):
                                                             gettingState = True
@@ -353,7 +353,7 @@ while stillRunning:
                                                             buffer = input("Enter the city of the new student record you would like to create, or enter <back> to return to address input: ")
                                                             if (buffer.lower() == 'back'):
                                                                 gettingCity = False
-                                                            elif (all(x.isalpha() or x.isspace() or x == '\'' or x == '-' for x in buffer)):
+                                                            elif ((not buffer == '') and all(x.isalpha() or x.isspace() or x == '\'' or x == '-' for x in buffer)):
                                                                 tempStudent.City = buffer
                                                                 while (gettingState):
                                                                     gettingZipCode = True
@@ -361,7 +361,7 @@ while stillRunning:
                                                                     buffer = input("Enter the state of the new student record you would like to create, or enter <back> to return to city input: ")
                                                                     if (buffer.lower() == 'back'):
                                                                         gettingState = False
-                                                                    elif (all(x.isalpha() or x.isspace() or x == '\'' or x == '-' for x in buffer)):
+                                                                    elif ((not buffer == '') and all(x.isalpha() or x.isspace() or x == '\'' or x == '-' for x in buffer)):
                                                                         tempStudent.State = buffer
                                                                         while (gettingZipCode):
                                                                             gettingMobilePhoneNumber = True
@@ -369,14 +369,14 @@ while stillRunning:
                                                                             buffer = input("Enter the zip code of the new student record you would like to create, or enter <back> to return to state input: ")
                                                                             if (buffer.lower() == 'back'):
                                                                                 gettingZipCode = False
-                                                                            elif (buffer.isdigit() and len(buffer) > 3 and len(buffer) < 6):
+                                                                            elif ((not buffer == '') and buffer.isdigit() and len(buffer) > 3 and len(buffer) < 6):
                                                                                 tempStudent.ZipCode = buffer
                                                                                 while (gettingMobilePhoneNumber):
                                                                                     print('\n***ADD NEW STUDENT***')
                                                                                     buffer = input("Enter the mobile phone number of the new student record you would like to create, or enter <back> to return to zip code input: ")
                                                                                     if (buffer.lower() == 'back'):
                                                                                         gettingMobilePhoneNumber = False
-                                                                                    elif (all(x == 'x' or not x.isalpha() for x in buffer)):
+                                                                                    elif ((not buffer == '') and all(x == 'x' or not x.isalpha() for x in buffer)):
                                                                                         tempStudent.MobilePhoneNumber = buffer
                                                                                         if (add_student(tempStudent) == 0):
                                                                                             print('Student record successfully added')
@@ -444,7 +444,7 @@ while stillRunning:
                     buffer = buffer.lower()
                     if (buffer == 'back'):
                         updating = False
-                    elif (buffer.isdigit()):
+                    elif ((not buffer == '') and buffer.isdigit()):
                         if (check_student(buffer)):
                             updateID = buffer
                             while (updatingMajor):
@@ -476,7 +476,7 @@ while stillRunning:
                     buffer = buffer.lower()
                     if (buffer == 'back'):
                         updating = False
-                    elif (buffer.isdigit()):
+                    elif ((not buffer == '') and buffer.isdigit()):
                         if (check_student(buffer)):
                             updateID = buffer
                             while (updatingAdvisor):
@@ -484,7 +484,7 @@ while stillRunning:
                                 buffer = input("Enter the new advisor for the student record you would like to update, or enter <back> to return to student ID input: ")
                                 if (buffer.lower() == 'back'):
                                     updatingAdvisor = False
-                                elif (all(x.isalpha() or x.isspace() for x in buffer)):
+                                elif ((not buffer == '') and all(x.isalpha() or x.isspace() for x in buffer)):
                                     update_Advisor(updateID, buffer)
                                     updatingAdvisor = False
                                     updating = False
@@ -508,7 +508,7 @@ while stillRunning:
                     buffer = buffer.lower()
                     if (buffer == 'back'):
                         updating = False
-                    elif (buffer.isdigit()):
+                    elif ((not buffer == '') and buffer.isdigit()):
                         if (check_student(buffer)):
                             updateID = buffer
                             while (updatingPhoneNumber):
@@ -516,7 +516,7 @@ while stillRunning:
                                 buffer = input("Enter the new mobile phone number for the student record you would like to update, or enter <back> to return to student ID input: ")
                                 if (buffer.lower() == 'back'):
                                     updatingPhoneNumber = False
-                                elif (all(x == 'x' or not x.isalpha() for x in buffer)):
+                                elif ((not buffer == '') and all(x == 'x' or not x.isalpha() for x in buffer)):
                                     update_MobilePhoneNumber(updateID, buffer)
                                     updatingPhoneNumber = False
                                     updating = False
